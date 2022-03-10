@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 14:54:23 by atamraka          #+#    #+#             */
-/*   Updated: 2022/03/08 11:02:51 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/03/10 10:38:19 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ typedef struct    s_piece
 {
     int                blockcoords[8];
     char            pieceletter;
-    int                x_offset;
-    int                y_offset;
+    int                x_point;
+    int                y_point;
     struct s_piece    *next;
 }                t_piece;
 

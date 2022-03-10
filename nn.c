@@ -124,7 +124,7 @@ t_piece *makelist(char *buf, int size)
             current = current->next;
         }
         pieceletter++;
-        i +=21;
+        i += 21;//
     }
 }
 
@@ -137,5 +137,38 @@ t_piece *makepiece(char *buf, char pieceletter)
     int y;
     int i;
 
-    
+    i = 0;
+    x = 0;
+    y = 1;
+    if (!(piece_ptr = (t_piece*)malloc(sizeof(t_piece))))
+        return (NULL);
+    while (i < 20)
+    {
+        if (buf[i] == '#')
+        {
+            piece_ptr->blockcoords[x] = (i >= 5) ? (i % 5) : i; //no uranry operator
+            piece_ptr->blockcoords[y] = i / 5;
+            x += 2;
+            y += 2;
+        }
+        i++;
+    }
+    piece_ptr->x_offset = 0;
+    piece_ptr->y_offset = 0;
+    piece_ptr->pieceletter = pieceletter;
+    return (align(piece_ptr));
 }
+
+align
+
+t_piece *align(t_piece *piece)
+{
+    while (piece->blockcoords[0] != 0 && \
+            )
+        shift_x(piece, -1);
+    while (piece->blockcoords[1] != 0 && \)
+        shift_y(piece, -1);
+    return (piece);
+}
+ 
+void free_piece///
