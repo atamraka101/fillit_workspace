@@ -1,14 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 
-
-typedef struct tetriminos_piece
-{
-    int cordinates[8];
-    char letter;
-
-}   tet_item;
-
 int tetrimino_count(char *input)
 {
     int i;
@@ -73,27 +65,65 @@ int validate_tetriminos_shape(char *input, int size)
     return (1);
 }
 
-
-void parse_input(char *input, int inLen)
+typedef struct tetriminos_piece
 {
-    int i;
+    int cordinates[8];
+    char letter;
+    int x_point;
+    int y_point;
+    struct tetriminos_piece *next;
 
-    i = 0;
-    while (input[i] != '\0')
+}   tet_item;
+
+void free_tet_list(tet_item *list)
+{
+    tet_item *temp;
+
+    while(list)
     {
-        validate_tetriminos_shape(&input[i], 20);
-        //i += 20;
+        temp = list;
+        list = list->next;
+        free(temp);
     }
-    //return (1);
 }
 
-int main(void)
+
+tet_item *parse_input(char *input, int size)
 {
-    char input[20] = "....\n...#\n...#\n..##\n";
-    parse_input(input);
+    tet_item 
 
+    return (1);
+}
 
+int main(int argc, char *argv[])
+{
+    //char input[20] = "....\n...#\n...#\n..##\n";
+    int fd;
+    char  buff[545];
+    int size;
+    
+    if (argc != 2)
+    {
+        //ft_putstr("usage: ./fillit input_file\n");
+        printf("usage: ./fillit input_file\n");
+        return (1);
+    }
+    fd = open(argv[1], O_RDONLY);
+    if (fd < 0)
+    {
+        //ft_putstr("error\n");
+        printf("error\n");
+        return (1);
+    }
+    size = read(fd, buff, 545);
+    close (fd);
+    if (size < 19 || size >544)
+        return (0);
+    buff[size] = '\0';
+    if (validate_tetriminos_shape(buff, size))
+    {
+        parse_input(buff, size);
 
-
+    }
     return (1);
 }
