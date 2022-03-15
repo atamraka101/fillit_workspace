@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 12:23:42 by atamraka          #+#    #+#             */
-/*   Updated: 2022/03/14 12:23:57 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/03/14 21:33:39 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int tetrimino_count(char *input)
     return (hashcount);
 }
 
-int next_to_counter(char *input)
+int count_adjacent_hashes(char *input)
 {
     int i;
     int hashcount;
@@ -69,7 +69,7 @@ int validate_tetriminos_shape(char *input, int size)
     {
         if (tetrimino_count(input[i]) != 4)
             return (0);
-        if (next_to_counter(input[i]) != 6 && next_to_counter(input[i]) != 8)
+        if (count_adjacent_hashes(input[i]) != 6 && count_adjacent_hashes(input[i]) != 8)
             return (0);
         i += 21;
     }

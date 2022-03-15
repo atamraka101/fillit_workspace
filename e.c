@@ -5,7 +5,7 @@ int    tetricount(char *str)
 
     hashcount = 0;
     i = 0;
-    while (i < 19) 
+    while (i < 19)
     {
         if (str[i] && str[i] != '\n' && str[i] != '#' && str[i] != '.')
             return (0);
@@ -20,7 +20,7 @@ int    tetricount(char *str)
     return (hashcount);
 }
 
-int    next_to_counter(char *str)
+int    count_adjacent_hashes(char *str)
 {
     int i;
     int hashcount;
@@ -54,7 +54,7 @@ int validator(char *str, int size)
     {
         if (hashcount(str + i) != 4)
             return (0);
-        if (next_to_counter(str + 1) != 6 && next_to_counter(str + i) != 8)
+        if (count_adjacent_hashes(str + 1) != 6 && count_adjacent_hashes(str + i) != 8)
             return (0);
         i += 21;
     }
