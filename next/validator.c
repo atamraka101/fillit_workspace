@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 12:23:42 by atamraka          #+#    #+#             */
-/*   Updated: 2022/03/14 21:33:39 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/03/15 13:24:18 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,16 @@ int tetrimino_count(char *input)
 
     i = 0;
     hashcount = 0;
-    while (i <= 20)
+    while (i < 20)
     {
-        if (input[i] && input[i]) != '.' && input[i] != '#' && input[i] != '\n')
+        if (input[i] && input[i] != '.' && input[i] != '#' && input[i] != '\n')
             return (0);
-        if ((i % 5) == 4)
-        {
-            if (input[i] != '\n')
+        if (input[i] == '\n' && (i % 5) != 4)
                 return (0);
-        }
+        if ((i % 5) == 4 && input[i] != '\n')
+                return (0);
         if (input[i] == '#')
-            hashcount++
+            hashcount++;
         i++;
     }
     return (hashcount);
@@ -67,9 +66,11 @@ int validate_tetriminos_shape(char *input, int size)
     i = 0;
     while (i < size)
     {
-        if (tetrimino_count(input[i]) != 4)
+        if (tetrimino_count(&input[i]) != 4)
             return (0);
-        if (count_adjacent_hashes(input[i]) != 6 && count_adjacent_hashes(input[i]) != 8)
+        if (count_adjacent_hashes(&input[i]) != 6 && count_adjacent_hashes(&input[i]) != 8)
+            return (0);
+        if (((i + 20) < (size - 1)) && input[i + 20] != '\n')
             return (0);
         i += 21;
     }
