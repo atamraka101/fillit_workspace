@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
+#include <stdlib.h>
 
 int tetrimino_count(char *input)
 {
@@ -70,13 +70,14 @@ int validate_tetriminos_shape(char *input, int size)
 
 typedef struct tetriminos_piece
 {
-    int cordinates[8];
+    int coordinates[8];
     char letter;
-    int x_offset;
-    int y_offset;
+    int     x_offset;//column
+    int     y_offset;//row
     struct tetriminos_piece *next;
 
 }   tet_item;
+
 
 int get_coordinates(char *input, int inSize, int *coords)
 {
@@ -103,7 +104,11 @@ int get_coordinates(char *input, int inSize, int *coords)
         }
         row++;
     }
+    return (1);
 }
+
+
+
 
 
 
@@ -146,6 +151,7 @@ int align_coordinates_top_left(int *coords)
     return (1);
 }
 
+
 void free_tet_list(tet_item *list)
 {
     tet_item *temp;
@@ -159,6 +165,74 @@ void free_tet_list(tet_item *list)
 }
 
 
+tet_item *new_tet_item(char *input, int inSize, char letter)
+{
+    tet_item *newlist;
+
+    newlist = (tet_item *)malloc(sizeof(tet_item));
+    if (!newlist)
+        return (NULL);
+    get_coordinates(input, inSize, newlist->coordinates);
+    //Align coordinates
+    align_coordinates_top_left(newlist->coordinates);
+    newlist->letter = letter;
+    newlist->x_offset = 0;
+    newlist->y_offset = 0;
+    newlist->next = NULL;
+    return (newlist);
+}
+
+tet_item *make_tet_list(char *input, int inSize)
+{
+    tet_item *current;
+	tet_item *beginning;
+	int		i;
+	char	pieceletter;
+
+	i = 0;
+	pieceletter = 'A';
+	while (i < inSize)
+	{
+		if (pieceletter == 'A')
+		{
+			beginning = new_tet_item(input + i, 20, pieceletter);
+			current = beginning;
+		}
+		else
+		{
+			current->next = new_tet_item(input + i, 20, pieceletter);
+			current = current->next;
+		}
+		pieceletter++;
+		i += 21;
+	}
+	current->next = NULL;
+	return (beginning);
+}
+
+void display_tet_item(tet_item *tet_list)
+{
+    tet_item *current;
+    int i;
+
+    current = tet_list;
+    while(current != NULL)
+    {
+        i = 0;
+        printf("Tetriminos item:\n");
+        printf("coordinates:");
+        while (i < 8)
+        {
+            printf("%d ", current->coordinates[i]);
+            i++;
+        }
+        printf("\n");
+        printf("letter: %c\n", current->letter);
+        printf("x_offset: %d, y_offset: %d\n", current->x_offset, current->y_offset);
+        printf("\n");
+        current = current->next;
+    }
+}
 /*tet_item *parse_input(char *input, int size)
 {
     //tet_item
@@ -174,8 +248,31 @@ int main(int argc, char *argv[])
 
     printf("Checking coordinates\n");
     int cords[8];
+    tet_item *list;
 
-    get_coordinates(&input[21], 20, cords);
+    list = make_tet_list(input, 42);
+    display_tet_item(list);
+    free_tet_list(list);
+    /*tet_item *first;
+
+    first = new_tet_item(&input[0], 20, 'A');
+    int i;
+    i = 0;
+
+    printf("First item:\n");
+    printf("coordinates:");
+    while (i < 8)
+    {
+        printf("%d ", first->coordinates[i]);
+        i++;
+    }
+    printf("\n");
+    printf("letter: %c\n", first->letter);
+    printf("x_offset: %d, y_offset: %d\n", first->x_offset, first->y_offset);
+
+    free(first);
+    */
+    /*get_coordinates(&input[21], 20, cords);
 
     int i;
 
@@ -197,7 +294,7 @@ int main(int argc, char *argv[])
         printf("%d ", cords[i]);
         i++;
     }
-    printf("\n");
+    printf("\n");*/
     /*int fd;
     char  buff[545];
     int size;

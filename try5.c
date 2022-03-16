@@ -8,7 +8,7 @@
 
 typedef struct tetriminos_piece
 {
-	int cordinates[8];
+	int coordinates[8];
 	char letter;
 }			tet_item;
 
