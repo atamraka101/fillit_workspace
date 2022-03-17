@@ -6,7 +6,11 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 09:34:26 by atamraka          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/03/17 11:57:38 by atamraka         ###   ########.fr       */
+=======
+/*   Updated: 2022/03/16 15:11:55 by atamraka         ###   ########.fr       */
+>>>>>>> 508c1eba1dad0a97b814df06b2c2b9626099405f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +116,13 @@ tet_item *parser(char *filename)
 	buff[bytecount] = '\0';
 	if (!validate_tetriminos_shape(buff, bytecount))
 		return (NULL);
+<<<<<<< HEAD
 	return (make_tet_list(buff, bytecount));
 	//free from main; free needed
+=======
+	//return (make_tet_list(buff, bytecount));
+	//free from main; free needed; if not use below 3 sentence not above one
+>>>>>>> 508c1eba1dad0a97b814df06b2c2b9626099405f
 	//tet_item *list;
 	//list = make_tet_list(buff, bytecount);
 	//free_tet_list(list);

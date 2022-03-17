@@ -78,7 +78,6 @@ typedef struct tetriminos_piece
 
 }   tet_item;
 
-
 int get_coordinates(char *input, int inSize, int *coords)
 {
     int row;
@@ -106,11 +105,6 @@ int get_coordinates(char *input, int inSize, int *coords)
     }
     return (1);
 }
-
-
-
-
-
 
 int shift_coordinates_rc(int *coords, int r, int c)
 {
@@ -151,7 +145,6 @@ int align_coordinates_top_left(int *coords)
     return (1);
 }
 
-
 void free_tet_list(tet_item *list)
 {
     tet_item *temp;
@@ -163,7 +156,6 @@ void free_tet_list(tet_item *list)
         free(temp);
     }
 }
-
 
 tet_item *new_tet_item(char *input, int inSize, char letter)
 {
@@ -324,3 +316,4 @@ int main(int argc, char *argv[])
     }*/
     return (1);
 }
+

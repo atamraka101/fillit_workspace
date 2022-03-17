@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egaliber <egaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 12:51:24 by egaliber          #+#    #+#             */
-/*   Updated: 2022/03/14 10:45:35 by egaliber         ###   ########.fr       */
+/*   Updated: 2022/03/17 11:48:50 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ int	main(int argc, char **argv)
 	{
 		ft_putstr("usage: ./fillit source_file\n")
 	}
-		if ((piecelist = parser(argv[1])) == NULL)
+	piecelist = parser(argv[i]);
+	if (!piecelist)
 	{
 		ft_putstr("error\n");
 		return (1);
 	}
 	solver(piecelist);
-	free_piecelist(piecelist);
+	free_tet_list(piecelist);
 	return (0);
 }
