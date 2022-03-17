@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 12:51:24 by egaliber          #+#    #+#             */
-/*   Updated: 2022/03/17 11:47:53 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/03/17 11:48:50 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	solver(piecelist);
-	free_piecelist(piecelist);
+	free_tet_list(piecelist);
 	return (0);
 }
