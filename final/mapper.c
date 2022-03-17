@@ -6,7 +6,7 @@
 /*   By: egaliber <egaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 10:56:51 by egaliber          #+#    #+#             */
-/*   Updated: 2022/03/14 11:48:54 by egaliber         ###   ########.fr       */
+/*   Updated: 2022/03/17 12:55:26 by egaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_map	*create_new_map(int mapsize)
 	return (map);
 }
 
-size_t	piece_counter(t_piece *piecelist)
+size_t	piece_counter(t_item *piecelist)
 {
 	size_t	counter;
 

@@ -6,7 +6,7 @@
 /*   By: egaliber <egaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 12:51:24 by egaliber          #+#    #+#             */
-/*   Updated: 2022/03/14 10:45:35 by egaliber         ###   ########.fr       */
+/*   Updated: 2022/03/17 12:55:01 by egaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_piece	*piecelist;
+	t_item	*piecelist;
 
 	if (argc != 2)
 	{

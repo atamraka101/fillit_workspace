@@ -3,76 +3,76 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: egaliber <egaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 09:34:26 by atamraka          #+#    #+#             */
-/*   Updated: 2022/03/16 09:38:55 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/03/17 12:58:44 by egaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int get_coordinates(char *input, int inSize, int *coords)
+int	get_coordinates(char *input, int inSize, int *coords)
 {
-    int row;
-    int column;
-    int ndx;
-    int i;
+	int	row;
+	int	column;
+	int	ndx;
+	int	i;
 
-    row = 0;
-    ndx = 0;
-    i = 0;
-    while (ndx < inSize && i < 8)
-    {
-        column = 0;
-        while (column < 5)
-        {
-            if (input[ndx] == '#')
-            {
-                coords[i++] = row;
-                coords[i++] = column;
-            }
-            column++;
-            ndx++;
-        }
-        row++;
-    }
-    return (1);
+	row = 0;
+	ndx = 0;
+	i = 0;
+	while (ndx < inSize && i < 8)
+	{
+		column = 0;
+		while (column < 5)
+		{
+			if (input[ndx] == '#')
+			{
+				coords[i++] = row;
+				coords[i++] = column;
+			}
+			column++;
+			ndx++;
+		}
+		row++;
+	}
+	return (1);
 }
 
-void free_tet_list(tet_item *list)
+void	free_tet_list(t_item *list)
 {
-    tet_item *temp;
+	t_item	*temp;
 
-    while(list)
-    {
-        temp = list;
-        list = list->next;
-        free(temp);
-    }
+	while (list)
+	{
+		temp = list;
+		list = list->next;
+		free(temp);
+	}
 }
 
-tet_item *new_tet_item(char *input, int inSize, char letter)
+t_item	*new_t_item(char *input, int inSize, char letter)
 {
-    tet_item *newlist;
+	t_item	*newlist;
 
-    newlist = (tet_item *)malloc(sizeof(tet_item));
-    if (!newlist)
-        return (NULL);
-    get_coordinates(input, inSize, newlist->coordinates);
-    //Align coordinates
-    align_coordinates_top_left(newlist->coordinates);
-    newlist->letter = letter;
-    newlist->x_offset = 0;
-    newlist->y_offset = 0;
-    newlist->next = NULL;
-    return (newlist);
+	newlist = (t_item *)malloc(sizeof(t_item));
+	if (!newlist)
+		return (NULL);
+	get_coordinates(input, inSize, newlist->coordinates);
+	//Align coordinates
+	align_coordinates_top_left(newlist->coordinates);
+	newlist->letter = letter;
+	newlist->x_offset = 0;
+	newlist->y_offset = 0;
+	newlist->next = NULL;
+	return (newlist);
 }
 
-tet_item *make_tet_list(char *input, int inSize)
+t_item	*make_tet_list(char *input, int inSize)
 {
-    tet_item *current;
-	tet_item *beginning;
+	t_item	*current;
+	t_item	*beginning;
 	int		i;
 	char	pieceletter;
 
@@ -82,12 +82,12 @@ tet_item *make_tet_list(char *input, int inSize)
 	{
 		if (pieceletter == 'A')
 		{
-			beginning = new_tet_item(input + i, 20, pieceletter);
+			beginning = new_t_item(input + i, 20, pieceletter);
 			current = beginning;
 		}
 		else
 		{
-			current->next = new_tet_item(input + i, 20, pieceletter);
+			current->next = new_t_item(input + i, 20, pieceletter);
 			current = current->next;
 		}
 		pieceletter++;
@@ -97,9 +97,8 @@ tet_item *make_tet_list(char *input, int inSize)
 	return (beginning);
 }
 
-tet_item *parser(char *filename)
+t_item	*parser(char *filename)
 {
-
 	char	buff[545];
 	int		fd;
 	int		bytecount;
@@ -114,7 +113,7 @@ tet_item *parser(char *filename)
 		return (NULL);
 	//return (make_tet_list(buff, bytecount));
 	//free from main; free needed
-	//tet_item *list;
+	//t_item *list;
 	//list = make_tet_list(buff, bytecount);
 	//free_tet_list(list);
 }
