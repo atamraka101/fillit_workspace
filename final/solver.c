@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   solver.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egaliber <egaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 10:49:57 by egaliber          #+#    #+#             */
-/*   Updated: 2022/03/14 12:33:30 by egaliber         ###   ########.fr       */
+/*   Updated: 2022/03/21 10:08:46 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int	overlap(t_map *map, t_piece *piece)
+int	overlap(t_map *map, t_item *piece)
 {
 	int	i;
 	int	x;
@@ -21,18 +21,27 @@ int	overlap(t_map *map, t_piece *piece)
 	i = 0;
 	x = 0;
 	y = 0;
-	x = piece->coords[i] + piece->x_set;
-	y = piece->coords[i + 1] + piece->y_set;
+	/*x = piece->coordinates[i] + piece->x_offset;
+	y = piece->coordinates[i + 1] + piece->y_offset;
 	while (i <= 6 && map->array[y][x] == '.')
 	{
 		i += 2;
-		x = piece->coords[i] + piece->x_set;
-		y = piece->coords[i + 1] + piece->y_set;
+		x = piece->coordinates[i] + piece->x_offset;
+		y = piece->coordinates[i + 1] + piece->y_offset;
+	}
+	return (i != 8);*/
+	y = piece->coordinates[i] + piece->y_offset;
+	x = piece->coordinates[i + 1] + piece->x_offset;
+	while (i <= 6 && map->array[y][x] == '.')
+	{
+		i += 2;
+		y = piece->coordinates[i] + piece->y_offset;
+		x = piece->coordinates[i + 1] + piece->x_offset;
 	}
 	return (i != 8);
 }
 
-void	placing(t_piece *piece, t_map *map, char letter)
+void	placing(t_item *piece, t_map *map, char letter)
 {
 	int	i;
 	int	x;
@@ -41,42 +50,59 @@ void	placing(t_piece *piece, t_map *map, char letter)
 	i = 0;
 	x = 0;
 	y = 0;
+	/*while (i <= 6)
+	{
+		x = piece->coordinates[i] + piece->x_offset;
+		y = piece->coordinates[i + 1] + piece->y_offset;
+		map->array[y][x] = letter;
+		i += 2;
+	}*/
 	while (i <= 6)
 	{
-		x = piece->coords[i] + piece->x_set;
-		y = piece->coords[i + 1] + piece->y_set;
+		y = piece->coordinates[i] + piece->y_offset;
+		x = piece->coordinates[i + 1] + piece->x_offset;
 		map->array[y][x] = letter;
 		i += 2;
 	}
 }
 
-int	inside(t_piece *piece, int mapsize, char axis)
+int	inside(t_item *piece, int mapsize, char axis)
 {
-	if (axis == 'y')
-		return (piece->blockcoords[1] + piece->y_offset < map_size
-			&& piece->blockcoords[3] + piece->y_offset < map_size
-			&& piece->blockcoords[5] + piece->y_offset < map_size
-			&& piece->blockcoords[7] + piece->y_offset < map_size);
+	/*if (axis == 'y')
+		return (piece->coordinates[1] + piece->y_offset < mapsize
+			&& piece->coordinates[3] + piece->y_offset < mapsize
+			&& piece->coordinates[5] + piece->y_offset < mapsize
+			&& piece->coordinates[7] + piece->y_offset < mapsize);
 	else
-		return (piece->blockcoords[0] + piece->x_offset < map_size
-			&& piece->blockcoords[2] + piece->x_offset < map_size
-			&& piece->blockcoords[4] + piece->x_offset < map_size
-			&& piece->blockcoords[6] + piece->x_offset < map_size);
+		return (piece->coordinates[0] + piece->x_offset < mapsize
+			&& piece->coordinates[2] + piece->x_offset < mapsize
+			&& piece->coordinates[4] + piece->x_offset < mapsize
+			&& piece->coordinates[6] + piece->x_offset < mapsize);*/
+	if (axis == 'y')
+		return (piece->coordinates[0] + piece->y_offset < mapsize
+			&& piece->coordinates[2] + piece->y_offset < mapsize
+			&& piece->coordinates[4] + piece->y_offset < mapsize
+			&& piece->coordinates[6] + piece->y_offset < mapsize);
+	else
+		return (piece->coordinates[1] + piece->x_offset < mapsize
+			&& piece->coordinates[3] + piece->x_offset < mapsize
+			&& piece->coordinates[5] + piece->x_offset < mapsize
+			&& piece->coordinates[7] + piece->x_offset < mapsize);
 }
 
-int	determine_map(t_map *map, t_piece *piece, int mapsize)
+int	determine_map(t_map *map, t_item *piece, int mapsize)
 {
 	if (!piece)
 		return (1);
-	piece->x_set = 0;
-	piece->y_set = 0;
+	piece->x_offset = 0;
+	piece->y_offset = 0;
 	while (inside(piece, mapsize, 'y'))
 	{
 		while (inside(piece, mapsize, 'x'))
 		{
 			if (!overlap(map, piece))
 			{
-				placing(piece, map, piece->pieceletter);
+				placing(piece, map, piece->letter);
 				if (determine_map(map, piece->next, mapsize))
 					return (1);
 				else
@@ -84,15 +110,15 @@ int	determine_map(t_map *map, t_piece *piece, int mapsize)
 					placing(piece, map, '.');
 				}
 			}
-			piece->x_set++;
+			piece->x_offset++;
 		}
-		piece->x_set = 0;
-		piece->y_set++;
+		piece->x_offset = 0;
+		piece->y_offset++;
 	}
 	return (0);
 }
 
-void	solver(t_piece *piecelist)
+void	solver(t_item *piecelist)
 {
 	t_map	*map;
 	int		mapsize;
@@ -106,5 +132,5 @@ void	solver(t_piece *piecelist)
 		map = create_new_map(mapsize);
 	}
 	printer(map, mapsize);
-	free_map(amp, mapsize);
+	free_map(map, mapsize);
 }

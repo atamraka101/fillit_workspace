@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 12:51:24 by egaliber          #+#    #+#             */
-/*   Updated: 2022/03/17 11:48:50 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/03/17 20:46:56 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_piece	*piecelist;
+	t_item	*piecelist;
 
 	if (argc != 2)
 	{

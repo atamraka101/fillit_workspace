@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egaliber <egaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 10:56:51 by egaliber          #+#    #+#             */
-/*   Updated: 2022/03/14 11:48:54 by egaliber         ###   ########.fr       */
+/*   Updated: 2022/03/17 21:23:13 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	count_map_size(int n)
 	{
 		mapsize++;
 	}
-	return (map_size);
+	return (mapsize);
 }
 
 t_map	*create_new_map(int mapsize)
@@ -34,7 +34,7 @@ t_map	*create_new_map(int mapsize)
 	int		i;
 
 	i = 0;
-	map = (t_map *) malloc(sizeof)(t_map));
+	map = (t_map *) malloc(sizeof(t_map));
 	map->array = (char **)malloc(sizeof(char *) * mapsize);
 	while (i < mapsize)
 	{
@@ -45,7 +45,7 @@ t_map	*create_new_map(int mapsize)
 	return (map);
 }
 
-size_t	piece_counter(t_piece *piecelist)
+size_t	piece_counter(t_item *piecelist)
 {
 	size_t	counter;
 
@@ -53,9 +53,9 @@ size_t	piece_counter(t_piece *piecelist)
 	while (piecelist)
 	{
 			piecelist = piecelist -> next;
-			count++;
+			counter++;
 	}
-	return (count);
+	return (counter);
 }
 
 void	printer(t_map *map, int size)
@@ -78,9 +78,9 @@ void	free_map(t_map *map, int mapsize)
 	i = 0;
 	while (i < mapsize)
 	{
-		ft_memdel(void **)&(map->array[i]));
+		ft_memdel((void **)&(map->array[i]));
 		i++;
 	}
-	ft_memdel((void **)&(map->array[i]));
+//	ft_memdel((void **)&(map->array[i]));
 	ft_memdel((void **)&map);
 }
