@@ -3,10 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: egaliber <egaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 09:34:26 by atamraka          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/03/22 10:10:10 by atamraka         ###   ########.fr       */
+=======
+<<<<<<< HEAD
+/*   Updated: 2022/03/16 15:11:55 by atamraka         ###   ########.fr       */
+=======
+/*   Updated: 2022/03/17 12:58:44 by egaliber         ###   ########.fr       */
+>>>>>>> 481786d95acd3a78b7f08f77dfa2d88e21e59636
+>>>>>>> refs/remotes/origin/main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +125,15 @@ t_item	*parser(char *filename)
 <<<<<<< HEAD
 =======
 	//return (make_tet_list(buff, bytecount));
+<<<<<<< HEAD
 	//free from main; free needed; if not use below 3 sentence not above one
 >>>>>>> 508c1eba1dad0a97b814df06b2c2b9626099405f
 	//tet_item *list;
 =======
+<<<<<<< HEAD
+=======
+	//free from main; free needed
+>>>>>>> refs/remotes/origin/main
 	//t_item *list;
 >>>>>>> 481786d95acd3a78b7f08f77dfa2d88e21e59636
 	//list = make_tet_list(buff, bytecount);
