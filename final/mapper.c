@@ -6,7 +6,7 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 10:56:51 by egaliber          #+#    #+#             */
-/*   Updated: 2022/03/17 12:02:23 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/03/22 10:09:34 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ t_map	*create_new_map(int mapsize)
 	return (map);
 }
 
+<<<<<<< HEAD
 size_t	piece_counter(tet_item *piecelist)
+=======
+size_t	piece_counter(t_item *piecelist)
+>>>>>>> 481786d95acd3a78b7f08f77dfa2d88e21e59636
 {
 	size_t	counter;
 

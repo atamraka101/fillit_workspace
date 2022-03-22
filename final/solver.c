@@ -6,13 +6,13 @@
 /*   By: atamraka <atamraka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 10:49:57 by egaliber          #+#    #+#             */
-/*   Updated: 2022/03/17 12:00:58 by atamraka         ###   ########.fr       */
+/*   Updated: 2022/03/22 10:10:22 by atamraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int	overlap(t_map *map, tet_item *piece)
+int	overlap(t_map *map, t_item *piece)
 {
 	int	i;
 	int	x;
@@ -32,7 +32,7 @@ int	overlap(t_map *map, tet_item *piece)
 	return (i != 8);
 }
 
-void	placing(tet_item *piece, t_map *map, char letter)
+void	placing(t_item *piece, t_map *map, char letter)
 {
 	int	i;
 	int	x;
@@ -50,7 +50,7 @@ void	placing(tet_item *piece, t_map *map, char letter)
 	}
 }
 
-int	inside(tet_item *piece, int mapsize, char axis)
+int	inside(t_item *piece, int mapsize, char axis)
 {
 	if (axis == 'y')
 		return (piece->blockcoords[1] + piece->y_offset < map_size
@@ -64,7 +64,7 @@ int	inside(tet_item *piece, int mapsize, char axis)
 			&& piece->blockcoords[6] + piece->x_offset < map_size);
 }
 
-int	determine_map(t_map *map, tet_item *piece, int mapsize)
+int	determine_map(t_map *map, t_item *piece, int mapsize)
 {
 	if (!piece)
 		return (1);
@@ -92,7 +92,7 @@ int	determine_map(t_map *map, tet_item *piece, int mapsize)
 	return (0);
 }
 
-void	solver(tet_item *piecelist)
+void	solver(t_item *piecelist)
 {
 	t_map	*map;
 	int		mapsize;
